@@ -1,0 +1,7 @@
+TAP version 13
+# Subtest: Test Suit
+ok 1 - Test Suit
+  ---
+  duration_ms: 0.977
+  type: 'suite'
+  ...
