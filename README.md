@@ -61,3 +61,9 @@ To generate allure report run the command
 
 ![allure](https://github.com/ranam2030/arbree_test/assets/24250050/a7cc7040-6528-4074-a64a-1ce300f48dad)
 
+## GitHub Action Workflows
+
+![GitHub Action Workflows](https://github.com/ranam2030/arbree_test/assets/24250050/1565ee67-54b7-4f6a-9f76-d25a64d7eeed)
+
+
+
