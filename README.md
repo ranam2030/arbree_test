@@ -59,5 +59,5 @@ To generate allure report run the command
 
 ## Allure Result
 
-![Allure Screenshort]([https://ibb.co/LdHWsQc](https://imgtr.ee/images/2024/06/29/0371f458a658be769a85235927b46c72.th.png))
+![Allure Screenshort]([[https://ibb.co/LdHWsQc](https://imgtr.ee/images/2024/06/29/0371f458a658be769a85235927b46c72.th.png)](https://github.com/ranam2030/arbree_test/assets/24250050/a7cc7040-6528-4074-a64a-1ce300f48dad))
 
