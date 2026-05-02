@@ -1,1 +1,1 @@
-export const loginUrl = 'https://www.saucedemo.com/v1/';
+export const loginUrl = process.env.LOGIN_URL!;
