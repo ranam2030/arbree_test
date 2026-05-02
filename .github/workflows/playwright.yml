@@ -9,9 +9,9 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      LOGIN_URL: ${{ secrets.LOGIN_URL }}
-      LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
-      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+      LOGIN_URL: ${{ secrets.LOGIN_URL || 'https://www.saucedemo.com/v1/' }}
+      LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME || 'standard_user' }}
+      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD || 'secret_sauce' }}
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v5
