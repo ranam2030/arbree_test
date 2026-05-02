@@ -8,6 +8,8 @@ export class productPage{
     private readonly AddToCart:Locator;
     private readonly Cart:Locator;
     private readonly sortDropdown:Locator;
+    private readonly sortOptions:Locator;
+    private readonly productItems:Locator;
     private readonly productNames:Locator;
     private readonly productPrices:Locator;
 
@@ -17,6 +19,8 @@ export class productPage{
         this.AddToCart = page.locator('button.btn_primary.btn_inventory').first();
         this.Cart = page.locator('#shopping_cart_container');
         this.sortDropdown = page.locator('.product_sort_container');
+        this.sortOptions = page.locator('.product_sort_container option');
+        this.productItems = page.locator('.inventory_item');
         this.productNames = page.locator('.inventory_item_name');
         this.productPrices = page.locator('.inventory_item_price');
     }
@@ -39,5 +43,11 @@ export class productPage{
     async getProductPrices(): Promise<number[]>{
         const texts = await this.productPrices.allTextContents();
         return texts.map(t => parseFloat(t.replace('$', '')));
+    }
+    async getProductCount(): Promise<number>{
+        return await this.productItems.count();
+    }
+    async getSortOptions(): Promise<string[]>{
+        return await this.sortOptions.allTextContents();
     }
 }

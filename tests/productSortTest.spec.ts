@@ -50,4 +50,58 @@ test.describe("Product Sort", () => {
             expect(prices).toEqual([...prices].sort((a, b) => b - a));
         });
     });
+
+    test("should display products in Name A to Z order by default", async ({ ProductPage }) => {
+        await test.step("Verify default sort is Name A to Z without applying any sort", async () => {
+            const names = await ProductPage.getProductNames();
+            expect(names).toEqual([...names].sort());
+        });
+    });
+
+    test("should keep product count unchanged after each sort", async ({ ProductPage }) => {
+        const initialCount = await ProductPage.getProductCount();
+
+        for (const option of ['az', 'za', 'lohi', 'hilo'] as const) {
+            await test.step(`Verify product count after sort: ${option}`, async () => {
+                await ProductPage.sortBy(option);
+                const count = await ProductPage.getProductCount();
+                expect(count).toBe(initialCount);
+            });
+        }
+    });
+
+    test("should show cheapest product first after price low to high sort", async ({ ProductPage }) => {
+        await test.step("Apply sort: Price (low to high)", async () => {
+            await ProductPage.sortBy('lohi');
+        });
+
+        await test.step("Verify first product has the lowest price", async () => {
+            const prices = await ProductPage.getProductPrices();
+            expect(prices[0]).toBe(Math.min(...prices));
+        });
+    });
+
+    test("should show most expensive product first after price high to low sort", async ({ ProductPage }) => {
+        await test.step("Apply sort: Price (high to low)", async () => {
+            await ProductPage.sortBy('hilo');
+        });
+
+        await test.step("Verify first product has the highest price", async () => {
+            const prices = await ProductPage.getProductPrices();
+            expect(prices[0]).toBe(Math.max(...prices));
+        });
+    });
+
+    test("should have exactly 4 options in the sort dropdown", async ({ ProductPage }) => {
+        await test.step("Verify sort dropdown contains all 4 expected options", async () => {
+            const options = await ProductPage.getSortOptions();
+            expect(options).toHaveLength(4);
+            expect(options).toEqual([
+                'Name (A to Z)',
+                'Name (Z to A)',
+                'Price (low to high)',
+                'Price (high to low)',
+            ]);
+        });
+    });
 });
