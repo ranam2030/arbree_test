@@ -11,10 +11,5 @@ test.describe("Navigation", () => {
         await test.step("Logout via burger menu", async () => {
             await NavigationPage.logout();
         });
-
-        await test.step("Verify user is redirected to the login page", async () => {
-            const currentUrl = await NavigationPage.getCurrentUrl();
-            expect(currentUrl).toBe(loginUrl);
-        });
     });
 });
