@@ -1,8 +1,8 @@
 import {test as baseTest} from '@playwright/test';
-import { loginPage } from "../tests/pages/loginPage";
-import { productPage} from "../tests/pages/productsPage";
-import { yourcartPage } from "../tests/pages/yourCart";
-import { checkoutPage } from '../tests/pages/checkoutPage';
+import { loginPage } from "../pages/loginPage";
+import { productPage} from "../pages/productsPage";
+import { yourcartPage } from "../pages/yourCart";
+import { checkoutPage } from '../pages/checkoutPage';
 
 type pages = {
     LoginPage: loginPage,

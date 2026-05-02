@@ -1,5 +1,5 @@
 import {test, expect} from "../fixtures/pomFixtures";
-import {loginUrl} from "../config";
+import {loginUrl} from "../utils/config";
 test.describe('Test Suit',()=>{
     test('Test Secenerio One -P1',async({ page,LoginPage,ProductPage,YourCartPage,CheckoutPage })=>{
         await page.goto(loginUrl);
