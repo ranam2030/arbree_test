@@ -1,20 +1,37 @@
-import {test, expect} from "../fixtures/pomFixtures";
-import {loginUrl} from "../utils/config";
-test.describe('Test Suit',()=>{
-    test('Test Secenerio One -P1',async({ page,LoginPage,ProductPage,YourCartPage,CheckoutPage })=>{
+import { test, expect } from "../fixtures/pomFixtures";
+import { loginUrl, credentials } from "../utils/config";
+import { userInfo } from "../utils/testData";
+
+test.describe("Checkout Flow", () => {
+    test.beforeEach(async ({ page, LoginPage }) => {
         await page.goto(loginUrl);
-        await LoginPage.login("standard_user","secret_sauce");
-        await ProductPage.addToCart();
-        await ProductPage.cart();
-        const actualText = await ProductPage.getTheiTemTextinProduct();
-        const expectedText = await YourCartPage.getTheiTemTextinCart();
-        expect(actualText).toBe(expectedText);
-        await YourCartPage.clickCheckoutBtn();
-        await CheckoutPage.inputYourInfo("Yy","tt","1212");
-        await CheckoutPage.clickContinueBtn();
-        await CheckoutPage.clickFinishBtn();
-        const actualText1 = await CheckoutPage.finish();
-        expect(actualText1).toBe("THANK YOU FOR YOUR ORDER");
-        await page.close();
-    })
-})
+        await LoginPage.login(credentials.username, credentials.password);
+    });
+
+    test("should complete checkout and confirm order", async ({ ProductPage, YourCartPage, CheckoutPage }) => {
+        let productItemText: string | null;
+
+        await test.step("Add item to cart", async () => {
+            await ProductPage.addToCart();
+            productItemText = await ProductPage.getTheiTemTextinProduct();
+        });
+
+        await test.step("Verify cart item matches product", async () => {
+            await ProductPage.cart();
+            const cartItemText = await YourCartPage.getTheiTemTextinCart();
+            expect(productItemText).toBe(cartItemText);
+        });
+
+        await test.step("Fill in checkout information", async () => {
+            await YourCartPage.clickCheckoutBtn();
+            await CheckoutPage.inputYourInfo(userInfo.firstName, userInfo.lastName, userInfo.zipCode);
+            await CheckoutPage.clickContinueBtn();
+        });
+
+        await test.step("Confirm order", async () => {
+            await CheckoutPage.clickFinishBtn();
+            const confirmationText = await CheckoutPage.finish();
+            expect(confirmationText).toBe("Thank you for your order!");
+        });
+    });
+});
