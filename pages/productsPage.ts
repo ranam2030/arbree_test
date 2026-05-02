@@ -50,4 +50,10 @@ export class productPage{
     async getSortOptions(): Promise<string[]>{
         return await this.sortOptions.allTextContents();
     }
+    async getCartBadgeCount():Promise<string|null>{
+        return await this.page.locator('.shopping_cart_badge').textContent();
+    }
+    async isCartBadgeVisible():Promise<boolean>{
+        return await this.page.locator('.shopping_cart_badge').isVisible();
+    }
 }

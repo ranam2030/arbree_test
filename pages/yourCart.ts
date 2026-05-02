@@ -17,4 +17,13 @@ export class yourcartPage{
     async clickCheckoutBtn(){
         await this.checkoutBtn.click();
     }
+    async removeItem(){
+        await this.page.locator('.cart_item .btn_secondary').first().click();
+    }
+    async getCartItemCount():Promise<number>{
+        return await this.page.locator('.cart_item').count();
+    }
+    async isCartBadgeVisible():Promise<boolean>{
+        return await this.page.locator('.shopping_cart_badge').isVisible();
+    }
 }

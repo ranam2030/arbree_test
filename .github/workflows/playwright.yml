@@ -8,11 +8,17 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      LOGIN_URL: ${{ secrets.LOGIN_URL }}
+      LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers

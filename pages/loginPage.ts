@@ -17,4 +17,7 @@ export class loginPage{
         await this.passwordInput.fill(password);
         await this.loginBtn.click();
     }
+    async getErrorMessage():Promise<string|null>{
+        return await this.page.locator('[data-test="error"]').textContent();
+    }
 }
