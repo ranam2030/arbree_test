@@ -6,6 +6,7 @@ export class yourcartPage{
     private readonly checkoutBtn:Locator;
 
     constructor(page:Page){
+        this.page = page;
         this.sauceLabsBackpackText = page.locator('.inventory_item_name');
         this.checkoutBtn = page.locator('.btn_action.checkout_button');
     }

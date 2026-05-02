@@ -7,6 +7,7 @@ export class productPage{
     private readonly Cart:Locator;
 
     constructor(page:Page){
+        this.page = page;
         this.sauceLabsBackpackText = page.locator('a#item_4_title_link > div.inventory_item_name');
         this.AddToCart = page.locator('button.btn_primary.btn_inventory').first();
         this.Cart = page.locator('#shopping_cart_container');
